@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.arso.tabandtoolbar.MainActivity" >
+    <item android:id="@+id/action_sort_AZ_dateTime"
+        android:title="@string/action_sort_AZ_dateTime"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_sort_ZA_dateTime"
+        android:title="@string/action_sort_ZA_dateTime"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_sort_AZ_status"
+        android:title="@string/action_sort_AZ_status"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_sort_ZA_status"
+        android:title="@string/action_sort_ZA_status"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TabAndToolbar</string>
+    <string name="action_sort_AZ_dateTime">Date (A-Z)</string>
+    <string name="action_sort_ZA_dateTime">Date (Z-A)</string>
+    <string name="action_sort_AZ_status">Status (A-Z)</string>
+    <string name="action_sort_ZA_status">Status (Z-A)</string>
+</resources>
