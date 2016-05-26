@@ -11,11 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-
-import java.util.HashMap;
-
 
 public class HistoryProvider extends ContentProvider {
     static final String PROVIDER_NAME = "com.arso.sqlitehandler.HistoryProvider";
@@ -26,8 +22,6 @@ public class HistoryProvider extends ContentProvider {
     public static final String REF = "url";
     public static final String STATUS = "status";
     public static final String DATE = "dateTime";
-
-    private static HashMap<String, String> HISTORY_PROJECTION_MAP;
 
     static final int HISTORY = 1;
     static final int HISTORY_ID = 2;
@@ -83,14 +77,8 @@ public class HistoryProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        /**
-         * Add a new history record
-         */
-        long rowID = db.insert(	HISTORY_TABLE_NAME, "", values);
 
-        /**
-         * If record is added successfully
-         */
+        long rowID = db.insert(	HISTORY_TABLE_NAME, "", values);
 
         if (rowID > 0)
         {
@@ -108,7 +96,6 @@ public class HistoryProvider extends ContentProvider {
 
         switch (uriMatcher.match(uri)) {
             case HISTORY:
-                qb.setProjectionMap(HISTORY_PROJECTION_MAP);
                 break;
 
             case HISTORY_ID:
@@ -120,18 +107,17 @@ public class HistoryProvider extends ContentProvider {
         }
 
         if (sortOrder == null || sortOrder == ""){
-            /**
-             * By default sort on REFs names
-             */
             sortOrder = REF;
         }
         Cursor c = qb.query(db,	projection,	selection, selectionArgs,null, null, sortOrder);
 
-        /**
-         * register to watch a content URI for changes
-         */
         c.setNotificationUri(getContext().getContentResolver(), uri);
         return c;
+    }
+
+    @Override
+    public String getType(Uri uri) {
+        return null;
     }
 
     @Override
@@ -176,25 +162,5 @@ public class HistoryProvider extends ContentProvider {
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
-    }
-
-    @Override
-    public String getType(Uri uri) {
-        switch (uriMatcher.match(uri)){
-            /**
-             * Get all student records
-             */
-            case HISTORY:
-                return "vnd.android.cursor.dir/vnd.example.students";
-
-            /**
-             * Get a particular student
-             */
-            case HISTORY_ID:
-                return "vnd.android.cursor.item/vnd.example.students";
-
-            default:
-                throw new IllegalArgumentException("Unsupported URI: " + uri);
-        }
     }
 }
